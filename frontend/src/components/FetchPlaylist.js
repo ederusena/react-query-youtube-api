@@ -7,7 +7,7 @@ const FetchPlaylist = () => {
   const [pageToken, setPageToken] = useState();
   const KEY = process.env.REACT_APP_HOST_API_KEY;
 
-  const fetchPlaylist = async (key, pageToken) => {
+  const fetchPlaylist = async (pageToken) => {
     const { data } = await axios.get(
       'https://www.googleapis.com/youtube/v3/playlistItems',
       {
@@ -22,16 +22,16 @@ const FetchPlaylist = () => {
       );
       return data
   }
-  let { data, isLoading, error } = useQuery(
-    ['playlist', pageToken], fetchPlaylist,
-    // () => fetchPlaylist(KEY, pageToken),
+
+  const { data, isLoading, isError } = useQuery(
+    ['playlist', pageToken], () => fetchPlaylist(pageToken),
     { keepPreviousData: true, staleTime: 5000 }
   );
 
   return (
     <div className='container'>
       <h3>Playlist musicas</h3>
-      { error && <div>Algo saiu errado...</div>}
+      { isError && <div>Algo saiu errado...</div>}
 
       { isLoading ? (
         <div>Carregando...</div>

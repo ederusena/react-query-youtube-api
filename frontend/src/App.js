@@ -4,12 +4,12 @@ import FetchPlaylist from './components/FetchPlaylist';
 import { QueryClient, QueryClientProvider } from 'react-query' 
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-const queryClient = new QueryClient()
+const client = new QueryClient()
 
 function App() {
   return (
     <>
-      <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={client}>
           <div className="center">
             <h1>Youtube API</h1>
             <FetchPlaylist />
